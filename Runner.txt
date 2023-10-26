@@ -1,0 +1,9 @@
+Ésta clase contiene el codigo para poder ejecutar las pruebas con sus identificadores y que genere un JSON que exporte los resultados de cada ejecución:
+
+@CucumberOptions(
+        features = "src/test/resources/features",
+        glue = "com.example.cucumber",
+        tags = {"@login_access_to_page", "@login_check_fields", "@login_successful_login", "@login_unsuccessful_login", "@login_empty_fields", "@login_reset_button"},
+        plugin = {"json:target/cucumber-report.json"})
+public class CucumberRunner extends AbstractTestNGCucumberTests {
+}
