@@ -1,0 +1,56 @@
+Ésta clase contiene los elementos necesarios de la web con sus paths
+
+
+public class WebPageObject {
+
+    private WebDriver driver;
+
+    private Button btnLogin;
+    private Button btnReset;
+    private InputText txtUserName;
+    private InputText txtPassword;
+    private InputText txtWebTitle;
+    private InputText txtWrongMessage;
+
+    public WebPageObject(WebDriver driver) {
+        this.driver = driver;
+
+    	url = "https://demo.guru99.com/V4/index.php";
+
+        btnLogin = new Button(driver, By.id("btnLogin"));
+        btnReset = new Button(driver, By.id("btnReset"));
+        txtUserName = new InputText(driver, By.id("txtUserName"));
+        txtPassword = new InputText(driver, By.id("txtPassword"));
+        txtWebTitle = new InputText(driver, By.xpath("/html/head/title"));
+        txtWrongMessage = new InputText(driver, By.id("User or Password is not valid"));
+
+    }
+
+     public String getUrl() {
+        return url;
+    }
+
+    public Button getBtnLogin() {
+        return btnLogin;
+    }
+
+    public Button getBtnReset() {
+        return btnReset;
+    }
+
+    public InputText getTxtUserName() {
+        return txtUserName;
+    }
+
+    public InputText getTxtPassword() {
+        return txtPassword;
+    }
+
+    public InputText getTxtWebTitle() {
+        return txtWebTitle;
+    }
+
+    public InputText getTxtWrongMessage() {
+        return txtWrongMessage;
+    }
+}
