@@ -1,0 +1,79 @@
+public class StepDefinitions {
+
+    private WebPageObject webPageObject;
+
+    public StepDefinitions(WebPageObject webPageObject) {
+        this.webPageObject = webPageObject;
+    }
+
+    @Given("that the user opens the page {Web}")
+    public void thatTheUserOpensThePage(String web) {
+        webPageObject.getDriver().get(web);
+    }
+
+    @When("the user verifies that the page title is \"Guru99 Bank\"")
+    public void theUserVerifiesThatThePageTitleIsGuru99Bank() {
+        String actualTitle = webPageObject.getTxtWebTitle().getText();
+        Assert.assertEquals("Guru99 Bank", actualTitle);
+    }
+
+    @Then("the user should see the page with the \"correct title\"")
+    public void theUserShouldSeeThePageWithTheCorrectTitle() {
+        Assert.assertTrue(webPageObject.getTxtWebTitle().isDisplayed());
+    }
+
+    @Then("the user should see the \"UserID\", \"Password\" fields")
+    public void theUserShouldSeeTheUserIDPasswordFields() {
+        Assert.assertTrue(webPageObject.getTxtUserName().isDisplayed());
+        Assert.assertTrue(webPageObject.getTxtPassword().isDisplayed());
+    }
+
+    @And("the \"UserID\" field is accessible")
+    public void theUserIDFieldIsAccessible() {
+        webPageObject.getTxtUserName().sendKeys("username");
+        webPageObject.getTxtUserName().clear();
+    }
+
+    @And("the \"Password\" field is accessible")
+    public void thePasswordFieldIsAccessible() {
+        webPageObject.getTxtPassword().sendKeys("password");
+        webPageObject.getTxtPassword().clear();
+    }
+
+    @Then("the user should see the \"Login Button\" and \"Reset Button\"")
+    public void theUserShouldSeeTheLoginButtonAndResetButton() {
+        Assert.assertTrue(webPageObject.getBtnLogin().isDisplayed());
+        Assert.assertTrue(webPageObject.getBtnReset().isDisplayed());
+    }
+
+    @And("the \"Login Button\" is accessible")
+    public void theLoginButtonIsAccessible() {
+        webPageObject.getBtnLogin().click();
+    }
+
+    @And("the \"Reset Button\" is accessible")
+    public void theResetButtonIsAccessible() {
+        webPageObject.getBtnReset().click();
+    }
+
+    @When("the user enters the username {Credentials}")
+    public void theUserEntersTheUsernameCredentials(String credentials) {
+        webPageObject.getTxtUserName().sendKeys(credentials);
+    }
+
+    @And("the user presses the \"Login Button\"")
+    public void theUserPressesTheLoginButton() {
+        webPageObject.getBtnLogin().click();
+    }
+
+    @Then("the user should be redirected to the home page")
+    public void theUserShouldBeRedirectedToTheHomePage() {
+        Assert.assertTrue(webPageObject.getTxtWebTitle().getText().contains("Guru99 Bank"));
+    }
+
+    @And("the \"UserID\" and \"Password\" fields must be cleared")
+    public void theUserIDAndPasswordFieldsMustBeCleared() {
+        Assert.assertEquals("", webPageObject.getTxtUserName().getText());
+        Assert.assertEquals("", webPageObject.getTxtPassword().getText());
+    }
+}
