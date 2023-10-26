@@ -1,0 +1,88 @@
+Éste archivo contiene los Steps.feature a seguir para la generación de escenarios mediante Gherkin:
+
+# Feature: Login to Guru99 Bank page
+
+# Scenario: Access to page
+
+@id login_access_to_page
+
+Given that the user opens the page (Web)
+When the user verifies that the page title is "Guru99 Bank"
+Then the user should see the page with the "correct title"
+
+Examples:  
+  | Web		   | 
+  | Prueba_tecnica |   
+
+
+# Scenario: Checking the fields
+
+@id login_check_fields
+
+Given that the user opens the page (Web)
+Then the user should see the "UserID", "Password" fields
+And the "UserID" field is accessible
+And the "Password" field is accessible
+Then the user should see the "Login Button" and "Reset Button"
+And the "Login Button" is accessible
+And the "Reset Button" is accessible
+
+Examples:  
+  | Web		   | 
+  | Prueba_tecnica |   
+
+
+# Scenario: Successful login
+
+@id login_successful_login
+
+Given that the user opens the page (Web)
+When the user enters the username <Credentials>
+And the user presses the "Login Button"
+Then the user should be redirected to the home page
+
+Examples:  
+  | Credentials | Web		  |
+  | Usuario1	| Prueba_tecnica  | 
+
+
+# Scenario: Unsuccessful login
+
+@id login_unsuccessful_login
+
+Given that the user opens the page (Web)
+When the user enters the username <Credentials>
+Then the user presses the login button
+And the user should see the message "User or Password is not valid"
+
+Examples:  
+  | Credentials | Web		  |
+  | Usuario1	| Prueba_tecnica  | 
+
+
+# Scenario: Empty fields
+
+@id login_empty_fields
+
+Given that the user opens the page (Web)
+When the user leaves the "UserID" field empty
+Then the user clicks on the "Login Button"
+And the user should see the message "User or Password is not valid"
+
+Examples:  
+  | Web		   | 
+  | Prueba_tecnica |  
+
+
+# Scenario: Reset Button
+
+@id login_reset_button
+
+Given that the user opens the page (Web)
+When the user enters the username <Credentials>
+Then the user presses the "Reset Button"
+And and the "UserID" and "Password" fields must be cleared
+
+Examples:  
+  | Web		   | 
+  | Prueba_tecnica |  
