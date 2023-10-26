@@ -1,0 +1,50 @@
+Este es el workflow que se me ocurre generar para lanzar las pruebas a las 01:00 de la noche, eligiendo las pruebas y que envie los resultados por correo electronico:
+
+name: Run all tests at night
+
+on:
+  schedule:
+    # Run at 01:00 UTC
+    - cron: "0 1 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: mvn clean install
+
+      - name: Run tests
+        run: mvn test
+
+      - name: Send email
+        uses: sendgrid/send-email@v3
+        with:
+          to: <email address>
+          from: <email address>
+          subject: Test results
+          body: |
+            **Test results**
+
+            The following tests were run:
+
+            * login_access_to_page
+            * login_check_fields
+	    * login_successful_login
+	    * login_unsuccessful_login
+	    * login_empty_fields
+	    * login_reset_button
+
+            The results are as follows:
+
+            | Scenario | Result |
+            |---|---|
+            | login_access_to_page     | Success |
+            | login_check_fields       | Success |
+      	    | login_successful_login   | Success |
+      	    | login_unsuccessful_login | Success |
+	          | login_empty_fields       | Success |
+	          | login_reset_button       | Success |
